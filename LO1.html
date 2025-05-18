@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Outcome 1</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* NAV BAR CSS copied exactly from your snippet */
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+      z-index: 20;
+      background: transparent;
+      justify-content: space-between;
+    }
+    nav img.logo {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    nav a.home-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      text-shadow: 0 0 4px black;
+    }
+    nav a.home-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #title-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      padding: 0 20px;
+    }
+
+    #title-section h1 {
+      font-size: 6vw;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    #title-section h2 {
+      font-size: 2vw;
+      font-weight: 300;
+      margin-top: 10px;
+      color: #ddd;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    #content {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 100px;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      padding: 40px 20px 80px; /* Added bottom padding for button */
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.5);
+      color: black;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    /* Button styles */
+    #openPdfBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #openPdfBtn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <!-- Nav bar inserted exactly as requested -->
+  <nav>
+    <img src="logo.png" alt="Logo" class="logo" />
+    <a href="lava.html" class="home-btn">Home</a>
+  </nav>
+
+  <section id="title-section">
+    <h1>Learning Outcome 1</h1>
+    <h2>Conceptualize, design, and develop interactive media products</h2>
+  </section>
+
+  <section id="content">
+    <p>
+      •	Moodboard: I created two moodboards with the image I had in my mind for what our group represents. I searched on pinterest the key word I thought of, picked out the images that speaked to me the most. 
+    </p>
+    <p>
+      They difference between them is the amount of pictures there is. The one that has less makes it easier to understand and get to the point, however the other one gets more in detail, making sure the person understands as much as possible.
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+
+    <button id="openPdfBtn">Open full PDF file</button>
+  </section>
+
+  <!-- WebGL Lava Shader -->
+  <script id="vertexShader" type="x-shader/x-vertex">
+    attribute vec2 a_position;
+    varying vec2 v_uv;
+    void main() {
+      v_uv = a_position * 0.5 + 0.5;
+      gl_Position = vec4(a_position, 0, 1);
+    }
+  </script>
+
+  <script id="fragmentShader" type="x-shader/x-fragment">
+    precision highp float;
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    varying vec2 v_uv;
+
+    float noise(vec2 st) {
+      vec2 i = floor(st);
+      vec2 f = fract(st);
+      float a = dot(i, vec2(12.9898,78.233));
+      float b = dot(i + vec2(1.0, 0.0), vec2(12.9898,78.233));
+      float c = dot(i + vec2(0.0, 1.0), vec2(12.9898,78.233));
+      float d = dot(i + vec2(1.0, 1.0), vec2(12.9898,78.233));
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(mix(fract(sin(a) * 43758.5453), fract(sin(b) * 43758.5453), u.x),
+                 mix(fract(sin(c) * 43758.5453), fract(sin(d) * 43758.5453), u.x), u.y);
+    }
+
+    vec3 rainbowPalette(float t) {
+      return vec3(
+        0.5 + 0.5 * sin(6.2831 * (t + 0.0)),
+        0.5 + 0.5 * sin(6.2831 * (t + 0.33)),
+        0.5 + 0.5 * sin(6.2831 * (t + 0.66))
+      );
+    }
+
+    void main() {
+      vec2 uv = v_uv;
+      vec2 mouse = u_mouse / u_resolution;
+
+      float dist = distance(uv, mouse);
+      float wave = sin(dist * 25.0 - u_time * 5.0) * 0.02;
+
+      vec2 swirl = vec2(
+        sin(u_time + uv.y * 10.0),
+        cos(u_time + uv.x * 10.0)
+      ) * 0.01;
+
+      uv += swirl + wave * normalize(uv - mouse);
+
+      float n = noise(uv * 6.0 + u_time * 0.2);
+      float glow = pow(1.0 - dist, 4.0);
+
+      vec3 color = rainbowPalette(n + glow * 0.5);
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  </script>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const gl = canvas.getContext('webgl');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function createShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const vertexShaderSource = document.getElementById('vertexShader').text;
+    const fragmentShaderSource = document.getElementById('fragmentShader').text;
+
+    const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error(gl.getProgramInfoLog(program));
+    }
+    gl.useProgram(program);
+
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    const positions = new Float32Array([
+      -1, -1, 1, -1, -1, 1,
+      -1, 1, 1, -1, 1, 1
+    ]);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+    const timeLocation = gl.getUniformLocation(program, 'u_time');
+    const mouseLocation = gl.getUniformLocation(program, 'u_mouse');
+
+    let startTime = performance.now();
+    let mouse = [0, 0];
+
+    window.addEventListener('mousemove', e => {
+      mouse = [e.clientX, canvas.height - e.clientY];
+    });
+
+    function render() {
+      let currentTime = (performance.now() - startTime) / 1000;
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+      gl.uniform1f(timeLocation, currentTime);
+      gl.uniform2f(mouseLocation, mouse[0], mouse[1]);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      requestAnimationFrame(render);
+    }
+
+    render();
+
+    // Button click handler to open PDF
+    const openPdfBtn = document.getElementById('openPdfBtn');
+    openPdfBtn.addEventListener('click', () => {
+      // Replace 'yourfile.pdf' with your actual PDF file path or URL
+      window.open('yourfile.pdf', '_blank');
+    });
+  </script>
+</body>
+</html>

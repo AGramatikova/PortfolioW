@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Outcome 2</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      height: auto;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+      z-index: 20;
+      background: transparent;
+      justify-content: space-between;
+    }
+    nav img.logo {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    nav a.home-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      text-shadow: 0 0 4px black;
+    }
+    nav a.home-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #intro {
+      height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      position: relative;
+      user-select: none;
+      text-align: center;
+      padding: 0 20px;
+    }
+    #intro h1 {
+      font-size: 6vw;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin: 0;
+      line-height: 1.1;
+    }
+    #intro h2 {
+      font-size: 2vw;
+      font-weight: normal;
+      color: #ccc;
+      margin-top: 10px;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Background and styling for the content area */
+    #content {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 100px;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      padding: 40px 20px 80px; /* extra bottom padding for button */
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.5); /* White 50% opacity */
+      color: black; /* Text color for readability */
+      border-radius: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    /* Button styles */
+    #openPdfBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #openPdfBtn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="lava"></canvas>
+
+  <nav>
+    <img src="logo.png" alt="Logo" class="logo" />
+    <a href="color.html" class="home-btn">Home</a>
+  </nav>
+
+  <section id="intro">
+    <h1>Learning Outcome 2</h1>
+    <h2>Transferable production</h2>
+  </section>
+
+  <section id="content">
+    <p>
+      •	Brand Guide - Tone of Voice Page
+•	Brand Guide - Color Palette
+I wrote the tone of voice page with the help of templates on the internet and of course what our group wants to present ourselves as.
+
+https://www.figma.com/design/D0AByBnS26DElhhpjlQ0ip/Studio-Platalea?node-id=247-102&p=f
+
+
+    </p>
+    •	Contacted client:
+Throughout the passed weeks, staying in touch with the client was an important part of the process to make sure we were on the right track. Whenever Jerryl, our main coordinator, wasn’t available I reached out to the client a couple of times to arrange our first meeting, coordinating schedules and confirming the time.
+•	Double diamond project Krom document
+Me and Adeline were responsible for applying the Double Diamond method to guide our design process. We began by researching the method and combining it with CMD tools to explore the challenge.
+In the Discover phase, we interviewed Studio Krom and conducted research to understand the target audience and their needs. In the Define phase, we created personas and research to better understand different types of dyslexia and how they could be represented in a digital format. During the Develop phase, we explored potential solutions and gathered user feedback to refine our ideas. 
+
+    <p>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+
+
+    <button id="openPdfBtn">Open full PDF file</button>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('lava');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let mouse = { x: -9999, y: -9999, px: -9999, py: -9999 };
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.px = mouse.x;
+      mouse.py = mouse.y;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY + window.scrollY;
+    });
+
+    function drawLavaBackground() {
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#ffcc00');
+      grad.addColorStop(0.25, '#ff6600');
+      grad.addColorStop(0.5, '#cc0000');
+      grad.addColorStop(0.75, '#990000');
+      grad.addColorStop(1, '#330000');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    const darkSpots = [];
+
+    function addDarkSpot(x, y) {
+      darkSpots.push({ x, y, radius: 32.5, alpha: 1 });
+    }
+
+    function updateDarkSpots() {
+      for (let spot of darkSpots) {
+        spot.alpha -= 0.01;
+      }
+      for (let i = darkSpots.length - 1; i >= 0; i--) {
+        if (darkSpots[i].alpha <= 0) darkSpots.splice(i, 1);
+      }
+    }
+
+    function drawDarkSpots() {
+      for (let spot of darkSpots) {
+        const grad = ctx.createRadialGradient(spot.x, spot.y - window.scrollY, 0, spot.x, spot.y - window.scrollY, spot.radius);
+        grad.addColorStop(0, `rgba(0, 0, 0, ${spot.alpha * 0.6})`);
+        grad.addColorStop(1, `rgba(0, 0, 0, 0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(spot.x, spot.y - window.scrollY, spot.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawLavaBackground();
+
+      if (mouse.x !== -9999) {
+        addDarkSpot(mouse.x, mouse.y);
+      }
+
+      updateDarkSpots();
+      drawDarkSpots();
+
+      requestAnimationFrame(render);
+    }
+
+    render();
+
+    // Button click handler: open PDF in new tab
+    const openPdfBtn = document.getElementById('openPdfBtn');
+    openPdfBtn.addEventListener('click', () => {
+      // Replace 'yourfile.pdf' with your actual PDF file path or URL
+      window.open('yourfile.pdf', '_blank');
+    });
+  </script>
+</body>
+</html>

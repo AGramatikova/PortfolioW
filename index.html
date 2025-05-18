@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desktop Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: url('download.webp') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 20px;
+      width: 80px;
+      height: 100vh;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+      gap: 25px;
+    }
+
+    .sidebar-app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: white;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .sidebar-app img {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .sidebar-app img:hover {
+      transform: scale(1.1);
+    }
+
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: rgba(220, 220, 220, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    .taskbar-apps {
+      display: flex;
+      gap: 10px;
+    }
+
+    .taskbar img {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+
+    .system-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    #desktop {
+      position: fixed;
+      top: 0;
+      left: 100px;
+      right: 0;
+      bottom: 40px;
+    }
+
+    .app-window {
+      position: absolute;
+      top: 60px;
+      left: 100px;
+      width: 360px;
+      height: 250px;
+      background: rgba(30, 30, 30, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-window .title-bar {
+      background: #222;
+      padding: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .app-window .close-btn {
+      background: transparent;
+      border: none;
+      color: #bbb;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .app-window .content {
+      padding: 15px;
+      flex-grow: 1;
+      font-size: 14px;
+      overflow-y: auto;
+    }
+
+    .full-file-btn {
+      margin-top: 15px;
+      padding: 8px 12px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .full-file-btn:hover {
+      background: #005a9e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-app" data-appid="1">
+      <img src="MSPaint.webp" />
+      <span>Learning Outcome 1</span>
+    </div>
+    <div class="sidebar-app" data-appid="2">
+      <img src="microsoft-word-2019-05-01.webp" />
+      <span>Learning Outcome 2</span>
+    </div>
+    <div class="sidebar-app" data-appid="3">
+      <img src="Google_Chrome_icon_(February_2022).svg.png" />
+      <span>Learning Outcome 3</span>
+    </div>
+    <div class="sidebar-app" data-appid="4">
+      <img src="Google-Translate-Icon-Logo-January-August-2015.png" />
+      <span>Learning Outcome 4</span>
+    </div>
+    <div class="sidebar-app" data-appid="5">
+      <img src="gmail-new.png" />
+      <span>Learning Outcome 5</span>
+    </div>
+    <div class="sidebar-app" data-appid="mywork">
+      <img src="sm_5b321c99945a2.jpg" />
+      <span>My Work</span>
+    </div>
+    <div class="sidebar-app" data-appid="aboutme">
+      <img src="woman-icon-vector-trendy-flat-260nw-743283871.webp" />
+      <span>About Me</span>
+    </div>
+  </div>
+
+  <!-- Desktop Area -->
+  <div id="desktop"></div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="taskbar-apps" id="taskbarApps"></div>
+    <div class="system-icons">
+      <img src="https://img.icons8.com/ios-filled/20/000000/wifi.png" />
+      <div id="clock">--:--</div>
+      <img src="https://img.icons8.com/ios-filled/20/000000/windows8.png" />
+    </div>
+  </div>
+
+  <script>
+    const apps = {
+      1: {
+        title: 'Learning Outcome 1',
+        icon: 'MSPaint.webp',
+        content: `<p><strong>Conceptualize, design, and develop interactive media products</strong></p>
+                  <p><br>You create engaging concepts and translate them into interactive validated media products...</p>`,
+        fileUrl: 'LO1.html'
+      },
+      2: {
+        title: 'Learning Outcome 2',
+        icon: 'microsoft-word-2019-05-01.webp',
+        content: `<p><strong>Transferable production</strong></p>
+                  <p><br>You document and comment your code using version control in a personal and team context and communicate technical recommendations.</p>`,
+        fileUrl: 'LO2.html'
+      },
+      3: {
+        title: 'Learning Outcome 3',
+        icon: 'Google_Chrome_icon_(February_2022).svg.png',
+        content: `<p><strong>Creative iterations</strong></p>
+                  <p><br>You present the successive iterations of your creative process and the connections between them...</p>`,
+        fileUrl: 'LO3.html'
+      },
+      4: {
+        title: 'Learning Outcome 4',
+        icon: 'Google-Translate-Icon-Logo-January-August-2015.png',
+        content: `<p><strong>Professional standards</strong></p>
+                  <p><br>You apply a methodological approach to formulate project goals, involve stakeholders, conduct research...</p>`,
+        fileUrl: 'LO4.html'
+      },
+      5: {
+        title: 'Learning Outcome 5',
+        icon: 'gmail-new.png',
+        content: `<p><strong>Personal leadership</strong></p>
+                  <p><br>You are aware of your own strengths and weaknesses and develop your learning attitude.</p>`,
+        fileUrl: 'LO5.html'
+      },
+      mywork: {
+        title: 'My Work',
+        icon: 'sm_5b321c99945a2.jpg',
+        content: `<p>This could show sample emails or messages related to the project.</p>`,
+        fileUrl: 'MyWork.html'
+      },
+      aboutme: {
+        title: 'About Me',
+        icon: 'woman-icon-vector-trendy-flat-260nw-743283871.webp',
+        content: `<p>Customize theme, toggle modes, or change user info here.</p>`,
+        fileUrl: 'AboutMe.html'
+      }
+    };
+
+    const opened = {};
+    const desktop = document.getElementById('desktop');
+    const taskbarApps = document.getElementById('taskbarApps');
+
+    function openApp(appId) {
+      if (opened[appId]) {
+        opened[appId].style.zIndex = getMaxZIndex() + 1;
+        return;
+      }
+
+      const app = apps[appId];
+      const win = document.createElement('div');
+      win.className = 'app-window';
+      win.style.zIndex = getMaxZIndex() + 1;
+      win.innerHTML = `
+        <div class="title-bar">
+          <span>${app.title}</span>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="content">
+          ${app.content}
+          <button class="full-file-btn">See full file</button>
+        </div>
+      `;
+      desktop.appendChild(win);
+      opened[appId] = win;
+
+      win.querySelector('.close-btn').addEventListener('click', () => {
+        win.remove();
+        delete opened[appId];
+        const icon = taskbarApps.querySelector(`[data-appid="${appId}"]`);
+        if (icon) icon.remove();
+      });
+
+      // 🔥 THIS is the updated behavior:
+      win.querySelector('.full-file-btn').addEventListener('click', () => {
+        if (app.fileUrl) {
+          window.open(app.fileUrl, '_blank');
+        } else {
+          alert('No file available.');
+        }
+      });
+
+      const taskIcon = document.createElement('img');
+      taskIcon.src = app.icon;
+      taskIcon.setAttribute('data-appid', appId);
+      taskIcon.addEventListener('click', () => {
+        win.style.zIndex = getMaxZIndex() + 1;
+      });
+      taskbarApps.appendChild(taskIcon);
+    }
+
+    function getMaxZIndex() {
+      return [...document.querySelectorAll('.app-window')].reduce((max, el) => {
+        const z = parseInt(getComputedStyle(el).zIndex) || 0;
+        return Math.max(max, z);
+      }, 1);
+    }
+
+    document.querySelectorAll('.sidebar-app').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const id = icon.getAttribute('data-appid');
+        openApp(id);
+      });
+    });
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
