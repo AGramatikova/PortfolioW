@@ -1,0 +1,70 @@
+/* Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    background: black;
+    font-family: Arial, sans-serif;
+  }
+/* Navbar */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 20;
+    background: transparent; /* remove background */
+    color: white;
+    user-select: none;
+    /* add subtle text glow */
+    text-shadow:
+      0 0 5px #ff4500,  /* lava orange glow */
+      0 0 10px #ff4500,
+      0 0 20px #ff6347;  /* tomato-ish glow */
+  }
+  
+  #logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ff6347; /* lava-ish red */
+  }
+  
+  #home-button {
+    margin-left: auto;
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #ffa07a; /* light salmon */
+    background: rgba(255, 69, 0, 0.2); /* subtle lava-orange translucent */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  #home-button:hover {
+    background-color: #ff4500;
+    color: black;
+    border-color: #ff4500;
+  }
+  #overlay-text {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 2rem;
+    font-weight: bold;
+    pointer-events: none;
+    user-select: none;
+    z-index: 15;
+    text-shadow:
+      0 0 10px #ff6347,
+      0 0 20px #ff4500;
+  }
+  
