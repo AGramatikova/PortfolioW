@@ -138,27 +138,17 @@
 
   <section id="content">
     <p>
-      •	Brand Guide - Tone of Voice Page
-•	Brand Guide - Color Palette
-I wrote the tone of voice page with the help of templates on the internet and of course what our group wants to present ourselves as.
-
-https://www.figma.com/design/D0AByBnS26DElhhpjlQ0ip/Studio-Platalea?node-id=247-102&p=f
-
-
-    </p>
-    •	Contacted client:
-Throughout the passed weeks, staying in touch with the client was an important part of the process to make sure we were on the right track. Whenever Jerryl, our main coordinator, wasn’t available I reached out to the client a couple of times to arrange our first meeting, coordinating schedules and confirming the time.
-•	Double diamond project Krom document
-Me and Adeline were responsible for applying the Double Diamond method to guide our design process. We began by researching the method and combining it with CMD tools to explore the challenge.
-In the Discover phase, we interviewed Studio Krom and conducted research to understand the target audience and their needs. In the Define phase, we created personas and research to better understand different types of dyslexia and how they could be represented in a digital format. During the Develop phase, we explored potential solutions and gathered user feedback to refine our ideas. 
-
-    <p>
+      • Brand Guide - Tone of Voice Page<br />
+      • Brand Guide - Color Palette<br />
+      I wrote the tone of voice page with the help of templates on the internet and of course what our group wants to present ourselves as.<br /><br />
+      https://www.figma.com/design/D0AByBnS26DElhhpjlQ0ip/Studio-Platalea?node-id=247-102&p=f
     </p>
     <p>
+      • Contacted client:<br />
+      Throughout the passed weeks, staying in touch with the client was an important part of the process to make sure we were on the right track. Whenever Jerryl, our main coordinator, wasn’t available I reached out to the client a couple of times to arrange our first meeting, coordinating schedules and confirming the time.<br />
+      • Double diamond project Krom document<br />
+      Me and Adeline were responsible for applying the Double Diamond method to guide our design process. We began by researching the method and combining it with CMD tools to explore the challenge. In the Discover phase, we interviewed Studio Krom and conducted research to understand the target audience and their needs. In the Define phase, we created personas and research to better understand different types of dyslexia and how they could be represented in a digital format. During the Develop phase, we explored potential solutions and gathered user feedback to refine our ideas.
     </p>
-    <p>
-    </p>
-
 
     <button id="openPdfBtn">Open full PDF file</button>
   </section>
@@ -183,37 +173,36 @@ In the Discover phase, we interviewed Studio Krom and conducted research to unde
       mouse.y = e.clientY + window.scrollY;
     });
 
-    function drawLavaBackground() {
+    function drawBackground() {
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, '#ffcc00');
-      grad.addColorStop(0.25, '#ff6600');
-      grad.addColorStop(0.5, '#cc0000');
-      grad.addColorStop(0.75, '#990000');
-      grad.addColorStop(1, '#330000');
+      grad.addColorStop(0, '#ff008c');      // pink start
+      grad.addColorStop(0.4, '#ff80b3');    // lighter pink
+      grad.addColorStop(0.7, '#7feb75');    // lighter green 
+      grad.addColorStop(1, '#25ea3f');      // green end
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    const darkSpots = [];
+    const lightSpots = [];
 
-    function addDarkSpot(x, y) {
-      darkSpots.push({ x, y, radius: 32.5, alpha: 1 });
+    function addLightSpot(x, y) {
+      lightSpots.push({ x, y, radius: 32.5, alpha: 1 });
     }
 
-    function updateDarkSpots() {
-      for (let spot of darkSpots) {
+    function updateLightSpots() {
+      for (let spot of lightSpots) {
         spot.alpha -= 0.01;
       }
-      for (let i = darkSpots.length - 1; i >= 0; i--) {
-        if (darkSpots[i].alpha <= 0) darkSpots.splice(i, 1);
+      for (let i = lightSpots.length - 1; i >= 0; i--) {
+        if (lightSpots[i].alpha <= 0) lightSpots.splice(i, 1);
       }
     }
 
-    function drawDarkSpots() {
-      for (let spot of darkSpots) {
+    function drawLightSpots() {
+      for (let spot of lightSpots) {
         const grad = ctx.createRadialGradient(spot.x, spot.y - window.scrollY, 0, spot.x, spot.y - window.scrollY, spot.radius);
-        grad.addColorStop(0, `rgba(0, 0, 0, ${spot.alpha * 0.6})`);
-        grad.addColorStop(1, `rgba(0, 0, 0, 0)`);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${spot.alpha * 0.6})`); // white 
+        grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.arc(spot.x, spot.y - window.scrollY, spot.radius, 0, Math.PI * 2);
@@ -223,14 +212,14 @@ In the Discover phase, we interviewed Studio Krom and conducted research to unde
 
     function render() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawLavaBackground();
+      drawBackground();
 
       if (mouse.x !== -9999) {
-        addDarkSpot(mouse.x, mouse.y);
+        addLightSpot(mouse.x, mouse.y);
       }
 
-      updateDarkSpots();
-      drawDarkSpots();
+      updateLightSpots();
+      drawLightSpots();
 
       requestAnimationFrame(render);
     }
