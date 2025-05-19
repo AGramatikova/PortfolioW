@@ -153,7 +153,7 @@
     #startMenu {
       position: fixed;
       bottom: 45px;
-      left: 15px; /* You can tweak this to 10px if you want */
+      left: 15px; 
       width: 300px;
       max-height: 400px;
       background: rgba(40, 40, 40, 0.98);
@@ -373,13 +373,13 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Start Menu Logic
+    // Start Menu 
     const startButton = document.getElementById('startButton');
     startButton.addEventListener('click', () => {
       startMenu.style.display = startMenu.style.display === 'none' || startMenu.style.display === '' ? 'flex' : 'none';
     });
 
-    // Populate Start Menu
+    // Start Menu
     for (const id in apps) {
       const app = apps[id];
       const icon = document.createElement('div');
