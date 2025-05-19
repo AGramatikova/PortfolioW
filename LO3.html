@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Outcome 3</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('windows-1-vyul4bczm8k0x1v5.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Nav bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav img.logo {
+      height: 40px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Intro Section */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #intro h1 {
+      font-size: 4rem;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+
+    #intro h2 {
+      font-size: 1.8rem;
+      margin-top: 10px;
+      color: #ddd;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Content section with square background */
+    #content {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: black;
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    #content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    #openPdfBtn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #openPdfBtn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="signature.png" alt="Logo" class="logo">
+    <a href="index.html">Home</a>
+  </nav>
+
+  <section id="intro">
+    <h1>Learning Outcome 3</h1>
+    <h2>Creative iterations</h2>
+  </section>
+
+  <section id="content">
+    <p>
+        •	Logo Design Process: 
+        Created multiple versions of the logo, refining the design iteratively. 
+    </p>
+    <p>        
+        •	Stylescape & Website Concept Development: 
+        Contributed ideas and adjusted designs. 
+    </p>
+    <p>
+        •	Interview:
+        Together with my teammate Adeline, we took the lead in conducting the first official client meeting. This session was key to understand their expectations and vision for the final product. I prepared a set of interview questions in advance, focusing on their goals, target audience, and what message they wanted to communicate through the project.
+        During the meeting, we actively listened and asked follow-up questions to clarify any uncertainties. It helped us gain a clearer picture of their priorities.
+        After the meeting, we shared what we learned with the rest of the team, which helped guide our design direction moving forward.
+        That meeting ensured that our ideas aligned with their needs from the very beginning.
+    </p>
+    <button id="openPdfBtn">Open full PDF file</button>
+  </section>
+
+  <script>
+    document.getElementById('openPdfBtn').addEventListener('click', () => {
+      window.open('Learning Outcome 3.docx', '_blank'); 
+    });
+  </script>
+
+</body>
+</html>
