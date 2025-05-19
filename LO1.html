@@ -125,10 +125,9 @@
 <body>
   <canvas id="canvas"></canvas>
 
-  <!-- Nav bar inserted exactly as requested -->
   <nav>
-    <img src="logo.png" alt="Logo" class="logo" />
-    <a href="lava.html" class="home-btn">Home</a>
+    <img src="signature.png" alt="Logo" class="logo" />
+    <a href="index.html" class="home-btn">Home</a>
   </nav>
 
   <section id="title-section">
@@ -153,7 +152,7 @@
     <button id="openPdfBtn">Open full PDF file</button>
   </section>
 
-  <!-- WebGL Lava Shader -->
+  <!-- WebGL Shader -->
   <script id="vertexShader" type="x-shader/x-vertex">
     attribute vec2 a_position;
     varying vec2 v_uv;
@@ -287,10 +286,9 @@
 
     render();
 
-    // Button click handler to open PDF
+    // Button to open PDF
     const openPdfBtn = document.getElementById('openPdfBtn');
     openPdfBtn.addEventListener('click', () => {
-      // Replace 'yourfile.pdf' with your actual PDF file path or URL
       window.open('Learning Outcome 1.docx', '_blank');
     });
   </script>
