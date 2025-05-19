@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Outcome 4</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('Window-Desktop-Wallpaper.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Nav bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav img.logo {
+      height: 40px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Intro Section */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #intro h1 {
+      font-size: 4rem;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+
+    #intro h2 {
+      font-size: 1.8rem;
+      margin-top: 10px;
+      color: #ddd;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Content section with square background */
+    #content {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: black;
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    #content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    #openPdfBtn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #openPdfBtn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="signature.png" alt="Logo" class="logo">
+    <a href="index.html">Home</a>
+  </nav>
+
+  <section id="intro">
+    <h1>Learning Outcome 4</h1>
+    <h2>Professional standards</h2>
+  </section>
+
+  <section id="content">
+    <p>
+        •	Group Presentation:
+        I created a presentation to showcast the final products me and my group made in the past weeks.        
+    </p>
+    <p>        
+        •	Brand Guide Contribution:
+        Worked collaboratively with the team to create a structured guide. Anyone that needed help I was happy to do so.        
+    </p>
+    <p>
+        •	Double diamond project Krom document
+        Me and Adeline were responsible for applying the Double Diamond method to guide our design process. We began by researching the method and combining it with CMD tools to explore the challenge.        
+    </p>
+    <p>
+        In the Discover phase, we interviewed Studio Krom and conducted research to understand the target audience and their needs. In the Define phase, we created personas and research to better understand different types of dyslexia and how they could be represented in a digital format. During the Develop phase, we explored potential solutions and gathered user feedback to refine our ideas. 
+    </p>
+    <button id="openPdfBtn">Open full PDF file</button>
+  </section>
+
+  <script>
+    document.getElementById('openPdfBtn').addEventListener('click', () => {
+      window.open('Learning Outcome 4.docx', '_blank'); 
+    });
+  </script>
+
+</body>
+</html>
