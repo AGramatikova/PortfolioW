@@ -17,7 +17,7 @@
     }
 
     body {
-      background: url('download.webp') no-repeat center center fixed;
+      background: url('rainbow.jpg') no-repeat center center fixed;
       background-size: cover;
       overflow: hidden;
     }
@@ -47,8 +47,8 @@
     }
 
     .sidebar-app img {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       cursor: pointer;
       transition: transform 0.2s;
     }
@@ -73,9 +73,10 @@
     .taskbar-apps {
       display: flex;
       gap: 10px;
+      align-items: center;
     }
 
-    .taskbar img {
+    .taskbar-apps img {
       width: 28px;
       height: 28px;
       cursor: pointer;
@@ -148,6 +149,45 @@
     .full-file-btn:hover {
       background: #005a9e;
     }
+
+    #startMenu {
+      position: fixed;
+      bottom: 45px;
+      left: 15px; /* You can tweak this to 10px if you want */
+      width: 300px;
+      max-height: 400px;
+      background: rgba(40, 40, 40, 0.98);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      padding: 10px;
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    #startMenu .sidebar-app {
+      width: 60px;
+      font-size: 10px;
+    }
+
+    #recycleBin {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      text-align: center;
+    }
+
+    #recycleBin img {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+
+    #recycleBin div {
+      color: white;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -187,13 +227,24 @@
   <!-- Desktop Area -->
   <div id="desktop"></div>
 
+  <!-- Recycle Bin -->
+  <div id="recycleBin" class="sidebar-app">
+    <img src="bin.png" />
+    <div>Recycle Bin</div>
+  </div>
+
+  <!-- Start Menu -->
+  <div id="startMenu"></div>
+
   <!-- Taskbar -->
   <div class="taskbar">
-    <div class="taskbar-apps" id="taskbarApps"></div>
+    <div class="taskbar-apps" style="display: flex; align-items: center; gap: 10px;">
+      <img id="startButton" src="https://img.icons8.com/ios-filled/28/000000/windows8.png" />
+      <div id="taskbarApps"></div>
+    </div>
     <div class="system-icons">
       <img src="https://img.icons8.com/ios-filled/20/000000/wifi.png" />
       <div id="clock">--:--</div>
-      <img src="https://img.icons8.com/ios-filled/20/000000/windows8.png" />
     </div>
   </div>
 
@@ -202,48 +253,43 @@
       1: {
         title: 'Learning Outcome 1',
         icon: 'MSPaint.webp',
-        content: `<p><strong>Conceptualize, design, and develop interactive media products</strong></p>
-                  <p><br>You create engaging concepts and translate them into interactive validated media products...</p>`,
+        content: `<p><strong>Conceptualize, design, and develop interactive media products</strong></p><p>You create engaging concepts and translate them into interactive validated media products...</p>`,
         fileUrl: 'LO1.html'
       },
       2: {
         title: 'Learning Outcome 2',
         icon: 'microsoft-word-2019-05-01.webp',
-        content: `<p><strong>Transferable production</strong></p>
-                  <p><br>You document and comment your code using version control in a personal and team context and communicate technical recommendations.</p>`,
+        content: `<p><strong>Transferable production</strong></p><p>You document and comment your code using version control...</p>`,
         fileUrl: 'LO2.html'
       },
       3: {
         title: 'Learning Outcome 3',
         icon: 'Google_Chrome_icon_(February_2022).svg.png',
-        content: `<p><strong>Creative iterations</strong></p>
-                  <p><br>You present the successive iterations of your creative process and the connections between them...</p>`,
+        content: `<p><strong>Creative iterations</strong></p><p>You present the successive iterations of your creative process...</p>`,
         fileUrl: 'LO3.html'
       },
       4: {
         title: 'Learning Outcome 4',
         icon: 'Google-Translate-Icon-Logo-January-August-2015.png',
-        content: `<p><strong>Professional standards</strong></p>
-                  <p><br>You apply a methodological approach to formulate project goals, involve stakeholders, conduct research...</p>`,
+        content: `<p><strong>Professional standards</strong></p><p>You apply a methodological approach...</p>`,
         fileUrl: 'LO4.html'
       },
       5: {
         title: 'Learning Outcome 5',
         icon: 'gmail-new.png',
-        content: `<p><strong>Personal leadership</strong></p>
-                  <p><br>You are aware of your own strengths and weaknesses and develop your learning attitude.</p>`,
+        content: `<p><strong>Personal leadership</strong></p><p>You are aware of your own strengths and weaknesses...</p>`,
         fileUrl: 'LO5.html'
       },
       mywork: {
         title: 'My Work',
         icon: 'sm_5b321c99945a2.jpg',
-        content: `<p>all of my work out of projects.</p>`,
+        content: `<p>This could show sample emails or messages related to the project.</p>`,
         fileUrl: 'MyWork.html'
       },
       aboutme: {
         title: 'About Me',
         icon: 'woman-icon-vector-trendy-flat-260nw-743283871.webp',
-        content: `<p>info about me.</p>`,
+        content: `<p>Customize theme, toggle modes, or change user info here.</p>`,
         fileUrl: 'AboutMe.html'
       }
     };
@@ -251,6 +297,7 @@
     const opened = {};
     const desktop = document.getElementById('desktop');
     const taskbarApps = document.getElementById('taskbarApps');
+    const startMenu = document.getElementById('startMenu');
 
     function openApp(appId) {
       if (opened[appId]) {
@@ -282,7 +329,6 @@
         if (icon) icon.remove();
       });
 
-      // 🔥 THIS is the updated behavior:
       win.querySelector('.full-file-btn').addEventListener('click', () => {
         if (app.fileUrl) {
           window.open(app.fileUrl, '_blank');
@@ -307,13 +353,15 @@
       }, 1);
     }
 
+    // Add event listeners for sidebar apps
     document.querySelectorAll('.sidebar-app').forEach(icon => {
       icon.addEventListener('click', () => {
         const id = icon.getAttribute('data-appid');
-        openApp(id);
+        if (id) openApp(id);
       });
     });
 
+    // Update clock
     function updateClock() {
       const now = new Date();
       document.getElementById('clock').textContent = now.toLocaleTimeString([], {
@@ -324,6 +372,26 @@
 
     updateClock();
     setInterval(updateClock, 1000);
+
+    // Start Menu Logic
+    const startButton = document.getElementById('startButton');
+    startButton.addEventListener('click', () => {
+      startMenu.style.display = startMenu.style.display === 'none' || startMenu.style.display === '' ? 'flex' : 'none';
+    });
+
+    // Populate Start Menu
+    for (const id in apps) {
+      const app = apps[id];
+      const icon = document.createElement('div');
+      icon.className = 'sidebar-app';
+      icon.setAttribute('data-appid', id);
+      icon.innerHTML = `<img src="${app.icon}" /><span>${app.title}</span>`;
+      icon.addEventListener('click', () => {
+        openApp(id);
+        startMenu.style.display = 'none';
+      });
+      startMenu.appendChild(icon);
+    }
   </script>
 </body>
 </html>
