@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Outcome 5</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('P7R4p.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Nav bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav img.logo {
+      height: 40px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Intro Section */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #intro h1 {
+      font-size: 4rem;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+
+    #intro h2 {
+      font-size: 1.8rem;
+      margin-top: 10px;
+      color: #ddd;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Content section with square background */
+    #content {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: black;
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    #content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    #openPdfBtn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #openPdfBtn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="signature.png" alt="Logo" class="logo">
+    <a href="index.html">Home</a>
+  </nav>
+
+  <section id="intro">
+    <h1>Learning Outcome 5</h1>
+    <h2>Personal leadership</h2>
+  </section>
+
+  <section id="content">
+    <p>
+        •	Creative Contributions in Teamwork:
+        I provided a couple ideas thru out the whole prosses of the branding.  
+    </p>
+    <p>        
+        •	Self-Reflection on Strengths & Weaknesses: 
+        Each one of the group members wrote our strengths and weaknesses in the Team Charter. I have noticed in previous group works I solve problems easily and calmly, for me communication is key when working with others and I try to implement  that as much as possible, I do find myself creative because of the ideas I constantly come up with. I do get distracted easily and find it hard to focus immediately, a don’t like the present in front of a lot of people because I get nervous and could forget key stuff.
+    </p>
+    <p>
+        •	Art Department Visit – Strip-S, March 20th:
+        I had the opportunity to visit the Art Department event at Strip-S. I went in with no specific expectations since I had never attended anything like this before, but that quickly changed the moment I stepped in and saw all the creative stands.
+        I explored every single one and found myself genuinely inspired. One of the highlights for me was the cardboard craft section. The level of detail and skill involved was impressive. Watching the artists cut, shape, and glue pieces together into intricate forms was fascinating.
+        I also really enjoyed browsing through the independent design booths, where artists showcased their original creations. The 3D dragon designs were definitely my favorite, but I also loved the variety of stickers featuring popular memes and original artwork.
+        Another standout moment for me was trying sculpting for the first time. I spent quite a bit of time working on a portrait and had great conversations with the artists there. They guided me through the sculpting process, explained the tools, and made it a really enjoyable learning experience.
+        The Film Academy's props display was yet another highlight, the quality and realism of the props they showcased was seriously impressive.
+        Lastly, I really appreciated the portfolio stands, where artists were friendly and welcoming. They even let me draw on their digital tablets and gave me helpful feedback on what looked good and how to improve.
+        Overall, the event was incredibly inspiring, and I left feeling very happy and motivated. I would recommend to people around me to visit whenever it opens again.
+    </p>
+
+    <button id="openPdfBtn">Open full PDF file</button>
+  </section>
+
+  <script>
+    document.getElementById('openPdfBtn').addEventListener('click', () => {
+      window.open('Learning Outcome 5.docx', '_blank'); 
+    });
+  </script>
+
+</body>
+</html>
